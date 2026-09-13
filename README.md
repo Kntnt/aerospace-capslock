@@ -26,35 +26,56 @@ This setup was checked with **AeroSpace 0.21.3-Beta** on macOS. It uses a QWERTY
 
 ### 1. Install AeroSpace
 
-If you use Homebrew:
+If AeroSpace is not already installed, install it with Homebrew:
 
 ```sh
 brew install --cask nikitabobko/tap/aerospace
 ```
 
-You can also follow the [AeroSpace installation guide](https://nikitabobko.github.io/AeroSpace/guide#installation). The helper needs the AeroSpace CLI; the build needs Apple's Command Line Tools. If those tools are missing, run `xcode-select --install` and finish Apple's installer before continuing.
+You can also follow the [AeroSpace installation guide](https://nikitabobko.github.io/AeroSpace/guide#installation). Include its command-line tool if you install manually.
 
-In **System Settings → Privacy & Security → Accessibility**, allow AeroSpace to control windows. If AeroSpace is missing, click **+** and select `/Applications/AeroSpace.app`. Apple's [Accessibility permissions guide](https://support.apple.com/guide/mac-help/allow-accessibility-apps-to-access-your-mac-mh43185/mac) explains this panel.
+### 2. Install Harmony with one command
 
-### 2. Install the configuration and helper
-
-Quit AeroSpace first if it is running, then:
+Copy and paste this line into your terminal:
 
 ```sh
-git clone https://github.com/Kntnt/aerospace-harmony.git
-cd aerospace-harmony
-./install.sh --dry-run
-./install.sh
+curl -fsSL https://raw.githubusercontent.com/Kntnt/aerospace-harmony/main/setup.sh | /bin/bash
 ```
 
-The installer builds the Swift helper and installs:
+The command downloads the configuration, builds and installs the helper for **Escape and app shortcuts**, and starts AeroSpace. If AeroSpace is already running, it reloads the configuration and restarts the helper.
+
+If **Ghostty is installed**, Harmony also configures **Cmd + T** to open a separate terminal window, preserving your other settings. Press **Cmd + Shift + comma** in Ghostty afterward to reload its configuration. Existing tabs need to be moved to separate windows; see [Ghostty: use separate windows](#ghostty-use-separate-windows).
+
+Replaced files are backed up under `~/.config/aerospace/backups/`. You can run the same command again to update Harmony, or to add its Ghostty settings after installing Ghostty.
+
+If macOS asks for permission, allow AeroSpace in **System Settings → Privacy & Security → Accessibility**. If AeroSpace is missing, click **+** and select `/Applications/AeroSpace.app`. Apple's [Accessibility permissions guide](https://support.apple.com/guide/mac-help/allow-accessibility-apps-to-access-your-mac-mh43185/mac) explains this panel.
+
+<details>
+<summary>Preview, prerequisites, and installation details</summary>
+
+To preview the changes, append the dry-run option:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/Kntnt/aerospace-harmony/main/setup.sh | /bin/bash -s -- --dry-run
+```
+
+The helper needs Apple's Command Line Tools. If the installer reports that they are missing, run `xcode-select --install`, finish Apple's installer, and rerun the Harmony command.
+
+The [download script](setup.sh) fetches a complete source archive and runs [the installer](install.sh). Temporary downloads are removed afterward. The installed files are:
 
 - `~/.aerospace.toml`
 - `~/.config/aerospace/bin/aerospace-shortcuts`
+- `~/.config/aerospace/ghostty.conf`, when Ghostty is installed
 
-It backs up replaced files under `~/.config/aerospace/backups/`. It stops if your configuration is a symlink or an alternate AeroSpace config exists, so you can update your dotfiles deliberately.
+For Ghostty, the installer finds the last existing configuration in its [documented loading order](https://ghostty.org/docs/config#file-location), including `config.ghostty`, legacy `config`, and a custom `XDG_CONFIG_HOME`. It appends a single include for Harmony's settings. If no configuration exists, it creates `~/Library/Application Support/com.mitchellh.ghostty/config`.
 
-Start AeroSpace from Applications. The helper starts with it, and the Control-Option-Command shortcuts are ready to use. Automatic startup is off in the supplied config; set `start-at-login = true` if you want AeroSpace to start when you sign in. After changing the helper, quit and reopen AeroSpace.
+The installer stops before changing files if a destination is a symlink or an alternate AeroSpace configuration exists. Update your dotfiles source directly in that case. Reinstalling replaces the Harmony configuration and helper; backups preserve your previous versions.
+
+Automatic startup at login is off in the supplied config; set `start-at-login = true` if you want AeroSpace to start when you sign in.
+
+To work from a local checkout instead, clone this repository and run `./install.sh` there. This also installs any changes you have made to the helper source.
+
+</details>
 
 ### 3. Optional: make Caps Lock your shortcut key
 
@@ -100,13 +121,13 @@ The browser follows your macOS default; Firefox was used in the original setup. 
 
 Ghostty's native macOS tabs can be treated as separate windows by AeroSpace. This can leave empty space in the layout or make the terminal shrink when you switch tabs. Manually enlarging it may only last until AeroSpace reapplies the layout. The problem is [reported with Ghostty 1.3.1](https://github.com/nikitabobko/AeroSpace/discussions/2071) and tracked in AeroSpace's [native tabs issue](https://github.com/nikitabobko/AeroSpace/issues/68).
 
-The recommended workaround for this setup is to use separate Ghostty windows and let AeroSpace arrange them. **Cmd + N** opens a window. To make the familiar **Cmd + T** do the same, add the setting from [ghostty.conf](ghostty.conf) to your existing `~/.config/ghostty/config`:
+The recommended workaround for this setup is to use separate Ghostty windows and let AeroSpace arrange them. **Cmd + N** opens a window. The Harmony installer makes **Cmd + T** do the same by including [ghostty.conf](ghostty.conf) in your Ghostty configuration:
 
 ```ini
 keybind = super+t=new_window
 ```
 
-Press **Cmd + Shift + comma** in Ghostty to reload its configuration. This is a Ghostty setting; `install.sh` does not install it or replace your terminal configuration.
+Press **Cmd + Shift + comma** in Ghostty to reload its configuration. The installer preserves your other Ghostty settings and keeps a backup of the file it changes. If you prefer to configure Ghostty manually, add the line above to your own configuration.
 
 This remaps Cmd + T; the menu and tab bar can still create native tabs. Use **New Window** when opening sessions from a menu. The printable cheat sheet includes these Ghostty shortcuts in a separate section using Command directly.
 
@@ -165,9 +186,10 @@ These modifier combinations leave common shortcuts available, but another app ca
 ```sh
 ./build.sh
 python3 tests/test_launch.py
+python3 tests/test_install.py
 ```
 
-The three launch tests use a fake browser and command-line tools to check window selection and movement without opening apps or rearranging your windows. The configuration was validated with AeroSpace 0.21.3-Beta. Fn combinations depend on your keyboard. An optional Caps mapping depends on your remapper.
+The launch tests use a fake browser and command-line tools to check window selection and movement without opening apps or rearranging your windows. Installer tests use isolated directories and fake commands to check backups, Ghostty configuration, repeat installs, download failures, and helper activation. The configuration was validated with AeroSpace 0.21.3-Beta. Fn combinations depend on your keyboard. An optional Caps mapping depends on your remapper.
 
 To rebuild the English A4 cheat sheet on macOS, use Python 3.11 or later with ReportLab and pypdf. With [uv](https://docs.astral.sh/uv/):
 
