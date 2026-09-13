@@ -48,5 +48,6 @@ echo "Installed the configuration and helper."
 if [[ -d "$backup_dir" ]]; then
     echo "Backup: $backup_dir"
 fi
-echo "In Hyperkey, remap Caps Lock and turn OFF 'Include shift in hyper key'."
+echo "Shortcuts use Control-Option-Command. Optionally map Caps Lock to those three modifiers."
+echo "For Hyperkey, turn OFF 'Include shift in hyper key'. See README for setup and alternatives."
 echo "Then start AeroSpace, or quit and reopen it if it is already running."

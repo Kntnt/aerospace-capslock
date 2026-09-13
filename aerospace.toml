@@ -1,7 +1,7 @@
-# Caps navigates; Caps + Shift brings or moves a window.
-# Caps Lock = ctrl-alt-cmd (Hyperkey: Include shift is OFF).
+# Control-Option-Command navigates; add Shift to bring or move a window.
+# Optional: map Caps Lock to ctrl-alt-cmd with a remapper; leave Shift out.
 # Hold physical Shift for the second layer. Fn + arrows sends Home/End/Page Up/Page Down.
-# Caps + Escape is handled outside AeroSpace so it can also resume window management.
+# Control-Option-Command + Escape is handled outside AeroSpace so it can also resume window management.
 config-version = 2
 start-at-login = false
 auto-reload-config = false
@@ -31,7 +31,7 @@ gaps.outer.right = 0
 
 [mode.main.binding]
 
-# Caps + Shift + letter: launch or activate the app and follow it to its workspace.
+# Control-Option-Command + Shift + letter: launch or activate the app and follow it to its workspace.
 ctrl-alt-cmd-shift-b = 'exec-and-forget "$HOME/.config/aerospace/bin/aerospace-shortcuts" launch b >> "$HOME/Library/Logs/AeroSpace-shortcuts.log" 2>&1'
 ctrl-alt-cmd-shift-c = 'exec-and-forget "$HOME/.config/aerospace/bin/aerospace-shortcuts" launch c >> "$HOME/Library/Logs/AeroSpace-shortcuts.log" 2>&1'
 ctrl-alt-cmd-shift-e = 'exec-and-forget "$HOME/.config/aerospace/bin/aerospace-shortcuts" launch e >> "$HOME/Library/Logs/AeroSpace-shortcuts.log" 2>&1'
@@ -40,7 +40,7 @@ ctrl-alt-cmd-shift-m = 'exec-and-forget "$HOME/.config/aerospace/bin/aerospace-s
 ctrl-alt-cmd-shift-s = 'exec-and-forget "$HOME/.config/aerospace/bin/aerospace-shortcuts" launch s >> "$HOME/Library/Logs/AeroSpace-shortcuts.log" 2>&1'
 ctrl-alt-cmd-shift-t = 'exec-and-forget "$HOME/.config/aerospace/bin/aerospace-shortcuts" launch t >> "$HOME/Library/Logs/AeroSpace-shortcuts.log" 2>&1'
 
-# Caps + letter/digit: show the workspace without moving windows.
+# Control-Option-Command + letter/digit: show the workspace without moving windows.
 ctrl-alt-cmd-b = 'workspace B; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-c = 'workspace C; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-e = 'workspace E; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
@@ -59,7 +59,7 @@ ctrl-alt-cmd-8 = 'workspace 8; move-mouse window-lazy-center || move-mouse monit
 ctrl-alt-cmd-9 = 'workspace 9; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-0 = 'workspace 0; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 
-# Caps + Shift + digit: move the focused window to that workspace and follow it.
+# Control-Option-Command + Shift + digit: move the focused window to that workspace and follow it.
 ctrl-alt-cmd-shift-1 = 'move-node-to-workspace --focus-follows-window 1; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-2 = 'move-node-to-workspace --focus-follows-window 2; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-3 = 'move-node-to-workspace --focus-follows-window 3; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
@@ -71,26 +71,26 @@ ctrl-alt-cmd-shift-8 = 'move-node-to-workspace --focus-follows-window 8; move-mo
 ctrl-alt-cmd-shift-9 = 'move-node-to-workspace --focus-follows-window 9; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-0 = 'move-node-to-workspace --focus-follows-window 0; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 
-# Caps + arrow: move focus.
+# Control-Option-Command + arrow: move focus.
 ctrl-alt-cmd-left = 'focus left; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-down = 'focus down; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-up = 'focus up; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-right = 'focus right; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 
-# Caps + Shift + arrow: move the window, including out of a group.
+# Control-Option-Command + Shift + arrow: move the window, including out of a group.
 ctrl-alt-cmd-shift-left = 'move left; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-down = 'move down; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-up = 'move up; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-right = 'move right; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 
-# Caps + Fn + arrow: group with the neighboring node.
+# Control-Option-Command + Fn + arrow: group with the neighboring node.
 # Fn + left/right/up/down = Home/End/Page Up/Page Down.
 ctrl-alt-cmd-home = 'join-with left; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-end = 'join-with right; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-pageUp = 'join-with up; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-pageDown = 'join-with down; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 
-# Caps + Shift + Fn + arrow: swap places with the neighboring window.
+# Control-Option-Command + Shift + Fn + arrow: swap places with the neighboring window.
 # Fn + left/right/up/down = Home/End/Page Up/Page Down.
 ctrl-alt-cmd-shift-home = 'swap left; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-shift-end = 'swap right; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
@@ -105,9 +105,9 @@ ctrl-alt-cmd-shift-f = 'layout floating tiling; move-mouse window-lazy-center ||
 ctrl-alt-cmd-n = 'balance-sizes; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-tab = 'workspace-back-and-forth; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 ctrl-alt-cmd-backspace = 'flatten-workspace-tree; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
-# U = size Up; D = size Down.
-ctrl-alt-cmd-u = 'resize smart +50; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
-ctrl-alt-cmd-d = 'resize smart -50; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
+# Adjacent keys: left shrinks, right grows.
+ctrl-alt-cmd-comma = 'resize smart -50; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
+ctrl-alt-cmd-period = 'resize smart +50; move-mouse window-lazy-center || move-mouse monitor-lazy-center'
 
-# Caps + Backspace removes ALL grouping on the workspace. It does not close windows.
-# Caps + Escape belongs to the helper, so the shortcut remains available while paused.
+# Control-Option-Command + Backspace removes ALL grouping on the workspace. It does not close windows.
+# Control-Option-Command + Escape belongs to the helper, so the shortcut remains available while paused.
