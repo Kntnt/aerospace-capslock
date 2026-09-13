@@ -15,6 +15,9 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "docs/cheatsheet.pdf"
 bindings = tomllib.loads((ROOT / "aerospace.toml").read_text())["mode"]["main"]["binding"]
 
+ghostty_settings = (ROOT / "ghostty.conf").read_text()
+assert "keybind = super+t=new_window" in ghostty_settings
+
 def expect(key, command):
     assert bindings[key].startswith(command + ";"), (key, bindings[key])
 
@@ -60,7 +63,7 @@ def line(text, size=11, font="Body", gap=16):
 
 def heading(text):
     global y
-    y -= 9
+    y -= 7
     line(text, 12, "Bold", 20)
 
 
@@ -74,8 +77,8 @@ def table(rows, widths, header=True):
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("LEFTPADDING", (0, 0), (-1, -1), 7),
         ("RIGHTPADDING", (0, 0), (-1, -1), 7),
-        ("TOPPADDING", (0, 0), (-1, -1), 4),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+        ("TOPPADDING", (0, 0), (-1, -1), 3),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
         ("LINEBELOW", (0, 0), (-1, -1), 0.35, colors.HexColor("#cccccc")),
     ]
     if header:
@@ -87,7 +90,7 @@ def table(rows, widths, header=True):
 
 
 line("AeroSpace", 25, "Bold", 32)
-line("Hold Caps Lock for every shortcut. Add Shift for the second layer.", 10.5, "Bold", 19)
+line("AeroSpace: hold Caps Lock. Add Shift for the second layer.", 10.5, "Bold", 19)
 line("Caps sends Ctrl + Option + Cmd. Press Shift separately.", 10.5, gap=20)
 table([["Caps + Escape", "Pause / resume tiling"]], [200, usable - 200], False)
 
@@ -116,18 +119,24 @@ table([
 
 heading("Layout and switching")
 table([["Shortcut", "Action"]] + [[a, b] for a, b, _, _ in layout_rows], [218, usable - 218])
+heading("Ghostty: separate windows (no Caps)")
+table([
+    ["Cmd + N / Cmd + T", "New terminal window"],
+    ["Cmd + Shift + comma", "Reload Ghostty configuration"],
+], [218, usable - 218], False)
+
 y -= 7
 line("Fn + ← / → / ↑ / ↓ sends Home / End / Page Up / Page Down on Mac keyboards.", 9.7, gap=14)
 line("Accordion: Left/Right in a horizontal group; Up/Down in a vertical group.", 9.7, gap=14)
 line("Pause reveals hidden workspace windows. No windows are closed.", 9.7, gap=14)
-line("Resize keys (+/−) use Swedish positions. See README for other layouts.", 9.7, gap=14)
+line("Resize keys (+/-) use Swedish positions. See README for other layouts.", 9.7, gap=14)
 assert y >= 28, y
 canvas.showPage()
 canvas.save()
 reader = PdfReader(OUTPUT)
 assert len(reader.pages) == 1
 text = reader.pages[0].extract_text()
-for phrase in ["Caps + Shift + Fn + arrow", "Caps + plus (+)", "Caps + Escape"]:
+for phrase in ["Caps + Shift + Fn + arrow", "Caps + plus (+)", "Caps + Escape", "Cmd + N / Cmd + T", "Cmd + Shift + comma"]:
     assert phrase in text
 print(OUTPUT)
 print("One A4 page. Text and shortcuts checked against the configuration.")

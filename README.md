@@ -86,9 +86,9 @@ The browser follows your macOS default; Firefox was used in the original setup. 
 
 ### Ghostty: use separate windows
 
-Ghostty's native macOS tabs can be treated as separate windows by AeroSpace. This can leave empty space in the layout or make the terminal shrink when you switch tabs. The problem is [reported with Ghostty 1.3.1](https://github.com/nikitabobko/AeroSpace/discussions/2071).
+Ghostty's native macOS tabs can be treated as separate windows by AeroSpace. This can leave empty space in the layout or make the terminal shrink when you switch tabs. Manually enlarging it may only last until AeroSpace reapplies the layout. The problem is [reported with Ghostty 1.3.1](https://github.com/nikitabobko/AeroSpace/discussions/2071) and tracked in AeroSpace's [native tabs issue](https://github.com/nikitabobko/AeroSpace/issues/68).
 
-For this setup, use separate Ghostty windows and let AeroSpace arrange them. **Cmd + N** opens a window. To make the familiar **Cmd + T** do the same, add this line to your existing `~/.config/ghostty/config`:
+The recommended workaround for this setup is to use separate Ghostty windows and let AeroSpace arrange them. **Cmd + N** opens a window. To make the familiar **Cmd + T** do the same, add the setting from [ghostty.conf](ghostty.conf) to your existing `~/.config/ghostty/config`:
 
 ```ini
 keybind = super+t=new_window
@@ -96,9 +96,11 @@ keybind = super+t=new_window
 
 Press **Cmd + Shift + comma** in Ghostty to reload its configuration. This is a Ghostty setting; `install.sh` does not install it or replace your terminal configuration.
 
+This remaps Cmd + T; the menu and tab bar can still create native tabs. Use **New Window** when opening sessions from a menu. The printable cheat sheet includes these Ghostty shortcuts in a separate section without Caps.
+
 For existing tabs, pause AeroSpace with **Caps + Escape**, select a tab, and choose **Window → Move Tab to New Window**, or drag the tab out of the window. Repeat until each session has its own window, then resume AeroSpace. These are the standard [macOS tab controls](https://support.apple.com/en-gb/guide/mac-help/mchla4695cce/mac).
 
-Use **Caps + L** to switch the terminal windows between tiles and accordion, and **Caps + arrows** to change focus. Each window can now be moved to its own workspace without splitting up a native tab group.
+Use **Caps + L** to switch the terminal windows between tiles and accordion, and **Caps + arrows** to change focus. Each window can now be moved to its own workspace without splitting up a native tab group. If a window is still floating after the migration, focus it and use **Caps + Shift + F** to return it to tiling.
 
 ## Arrange windows with arrows
 
