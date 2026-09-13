@@ -49,7 +49,7 @@ width, height = A4
 margin = 36
 usable = width - 2 * margin
 canvas = Canvas(str(OUTPUT), pagesize=A4)
-canvas.setTitle("AeroSpace - Control-Option-Command cheat sheet")
+canvas.setTitle("AeroSpace Harmony - Cheat sheet")
 canvas.setAuthor("Kntnt")
 y = height - margin
 
@@ -89,7 +89,7 @@ def table(rows, widths, header=True):
     y -= th
 
 
-line("AeroSpace", 25, "Bold", 32)
+line("AeroSpace Harmony", 25, "Bold", 32)
 line("Hold Control + Option + Command. Add Shift to bring/move a window.", 10.5, "Bold", 19)
 line("Optional: map Caps Lock to these three modifiers, with Shift left out.", 10.5, gap=20)
 table([["Ctrl+Opt+Cmd + Escape", "Pause / resume tiling"]], [200, usable - 200], False)

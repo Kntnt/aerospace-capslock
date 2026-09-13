@@ -1,8 +1,8 @@
-# AeroSpace with Control-Option-Command
+# AeroSpace Harmony
 
-**Keep Option for typing. Give window management its own shortcuts.**
+**Memorable shortcuts. Fewer conflicts. Comfortable window management.**
 
-[AeroSpace](https://github.com/nikitabobko/AeroSpace) makes it possible to arrange your Mac's windows from the keyboard. Its default Option-based shortcuts can get in the way of typing symbols and special characters. This configuration uses **Control-Option-Command** together, leaving Option and Option-Shift available for typing.
+AeroSpace Harmony gives [AeroSpace](https://github.com/nikitabobko/AeroSpace) a consistent set of shortcuts for arranging your Mac's windows. AeroSpace's default Option-based shortcuts can get in the way of typing symbols and special characters. This configuration uses **Control-Option-Command** together, leaving Option and Option-Shift available for typing.
 
 **Control-Option-Command navigates; add Shift to bring or move a window.** Use letters and digits to visit workspaces, and arrows to move focus. Add Shift to launch or activate an app, move a window to a workspace, or rearrange it. No Vim shortcuts to learn, and no service mode to enter before grouping windows.
 
@@ -41,8 +41,8 @@ In **System Settings → Privacy & Security → Accessibility**, allow AeroSpace
 Quit AeroSpace first if it is running, then:
 
 ```sh
-git clone https://github.com/Kntnt/aerospace-capslock.git
-cd aerospace-capslock
+git clone https://github.com/Kntnt/aerospace-harmony.git
+cd aerospace-harmony
 ./install.sh --dry-run
 ./install.sh
 ```
