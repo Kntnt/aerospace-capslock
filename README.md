@@ -2,9 +2,9 @@
 
 **Keep Option for typing. Give window management its own key.**
 
-[AeroSpace](https://github.com/nikitabobko/AeroSpace) makes it possible to arrange your Mac's windows from the keyboard. But its default Option-based shortcuts can get in the way of typing symbols, especially on layouts such as Swedish. A shortcut that makes window management easier should also let you write comfortably.
+[AeroSpace](https://github.com/nikitabobko/AeroSpace) makes it possible to arrange your Mac's windows from the keyboard. But its default Option-based shortcuts can get in the way of typing symbols and special characters. A shortcut that makes window management easier should also let you write comfortably.
 
-This configuration puts every window-management shortcut behind **Caps Lock**. Hold Caps to move around, open an app, arrange windows, or change the layout. Add Shift for a second set of actions. Use arrow keys for directions and memorable letters for apps. No Vim shortcuts to learn, and no service mode to enter before grouping windows.
+This configuration puts every window-management shortcut behind **Caps Lock**. **Caps navigates; Caps + Shift brings or moves a window.** Use letters and digits to visit workspaces, and arrows to move focus. Add Shift to launch or activate an app, move a window to a workspace, or rearrange it. No Vim shortcuts to learn, and no service mode to enter before grouping windows.
 
 The trick is simple: use [Hyperkey](https://hyperkey.app/) to make Caps Lock send **Control + Option + Command**, with **Shift left out**. Your hand presses one key; AeroSpace sees a three-modifier shortcut. Option and Option + Shift remain available for typing.
 
@@ -12,7 +12,8 @@ The trick is simple: use [Hyperkey](https://hyperkey.app/) to make Caps Lock sen
 
 ## A few shortcuts to start with
 
-- **Caps + B** brings your browser to workspace B. **Caps + Shift + B** shows that workspace.
+- **Caps + B** shows workspace B. **Caps + Shift + B** opens or activates your browser, brings its selected window to B, and follows it.
+- **Caps + 2** shows workspace 2. **Caps + Shift + 2** moves the current window there and follows it.
 - **Caps + arrow** changes focus. **Caps + Shift + arrow** moves the window.
 - **Caps + L** switches between tiles and accordion.
 - **Caps + Escape** pauses tiling. Press it again to resume.
@@ -21,7 +22,7 @@ Focus and the pointer follow your navigation. Empty workspaces move the pointer 
 
 ## Set it up
 
-This setup was checked with **AeroSpace 0.21.3-Beta** on macOS. The supplied key mapping targets a **Swedish keyboard**. Most shortcuts use letters, digits, and arrows; resizing uses the Swedish positions of `+` and `-`.
+This setup was checked with **AeroSpace 0.21.3-Beta** on macOS. It uses a QWERTY key mapping with letters, digits, arrows, and navigation keys.
 
 ### 1. Install AeroSpace and Hyperkey
 
@@ -68,7 +69,7 @@ Start AeroSpace from Applications. The helper starts with it. Automatic startup 
 
 ## Apps and workspaces
 
-**Caps + letter** launches or activates the app, moves its selected window to the matching workspace, and follows it with focus and the pointer. **Caps + Shift + letter** shows that workspace without launching anything.
+**Caps + letter** shows the matching workspace and moves the pointer there. **Caps + Shift + letter** launches or activates the app, moves its selected window to that workspace, and follows it with focus and the pointer. Visiting a workspace leaves the windows where they are.
 
 | Key | Remember it as | App / workspace |
 | --- | --- | --- |
@@ -82,7 +83,7 @@ Start AeroSpace from Applications. The helper starts with it. Automatic startup 
 
 The browser follows your macOS default; Firefox was used in the original setup. The other apps are explicit choices, expected in `/Applications`. To substitute your own editor, terminal, or other apps, edit the names in `appTarget` in [the helper source](src/aerospace-shortcuts.swift), then run the installer again. You only need the apps whose shortcuts you use.
 
-**Caps + 0–9** moves the current window to that numbered workspace and follows it. **Caps + Shift + 0–9** shows the workspace. **Caps + Tab** switches back and forth between the two most recent workspaces.
+**Caps + 0–9** shows the numbered workspace and moves the pointer there. **Caps + Shift + 0–9** moves the current window there and follows it. **Caps + Tab** switches back and forth between the two most recent workspaces.
 
 ### Ghostty: use separate windows
 
@@ -126,11 +127,11 @@ In a horizontal accordion, use Left/Right to move within the group; in a vertica
 | Caps + F | Fill the workspace / restore |
 | Caps + Shift + F | Float the current window / return it to tiling |
 | Caps + N | Balance window sizes |
-| Caps + plus (+) | Give the window more space |
-| Caps + minus (−) | Give the window less space |
+| Caps + U | Size Up: give the window more space |
+| Caps + D | Size Down: give the window less space |
 | Caps + Backspace | Remove all grouping on this workspace |
 
-The resize aliases in `key-mapping.key-notation-to-key-code` use the physical Swedish `+` and `-` keys. If you use another layout, adjust those aliases using AeroSpace's [key mapping documentation](https://nikitabobko.github.io/AeroSpace/guide#key-mapping). The supplied positions were checked with macOS **Swedish – Pro**.
+**U** and **D** stand for size **Up** and size **Down**. Layout shortcuts act directly; their Shift variants provide an alternative action in the same area, such as fullscreen versus floating for F.
 
 ## One key to return to a regular desktop
 

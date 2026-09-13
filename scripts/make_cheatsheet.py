@@ -36,8 +36,8 @@ layout_rows = [
     ("Caps + N", "Balance window sizes", "ctrl-alt-cmd-n", "balance-sizes"),
     ("Caps + Tab", "Previous workspace and back", "ctrl-alt-cmd-tab", "workspace-back-and-forth"),
     ("Caps + Backspace", "Remove ALL grouping on this workspace", "ctrl-alt-cmd-backspace", "flatten-workspace-tree"),
-    ("Caps + plus (+)", "Give the window more space", "ctrl-alt-cmd-svPlus", "resize smart +50"),
-    ("Caps + minus (-)", "Give the window less space", "ctrl-alt-cmd-svMinus", "resize smart -50"),
+    ("Caps + U", "Size Up: give the window more space", "ctrl-alt-cmd-u", "resize smart +50"),
+    ("Caps + D", "Size Down: give the window less space", "ctrl-alt-cmd-d", "resize smart -50"),
 ]
 for _, _, key, command in layout_rows:
     expect(key, command)
@@ -90,23 +90,23 @@ def table(rows, widths, header=True):
 
 
 line("AeroSpace", 25, "Bold", 32)
-line("AeroSpace: hold Caps Lock. Add Shift for the second layer.", 10.5, "Bold", 19)
+line("Caps navigates. Add Shift to bring or move a window.", 10.5, "Bold", 19)
 line("Caps sends Ctrl + Option + Cmd. Press Shift separately.", 10.5, gap=20)
 table([["Caps + Escape", "Pause / resume tiling"]], [200, usable - 200], False)
 
 heading("Apps and workspaces")
 rows = [["Key", "Caps + key", "Caps + Shift + key"]]
 for letter, app in [("B", "Default browser"), ("C", "Claude"), ("E", "Sublime Text"), ("G", "ChatGPT"), ("M", "Typora"), ("S", "Spotify"), ("T", "Ghostty")]:
-    assert f"launch {letter.lower()} " in bindings[f"ctrl-alt-cmd-{letter.lower()}"]
-    expect(f"ctrl-alt-cmd-shift-{letter.lower()}", f"workspace {letter}")
-    rows.append([letter, app + " in " + letter, "Show workspace " + letter])
+    assert f"launch {letter.lower()} " in bindings[f"ctrl-alt-cmd-shift-{letter.lower()}"]
+    expect(f"ctrl-alt-cmd-{letter.lower()}", f"workspace {letter}")
+    rows.append([letter, "Show workspace " + letter, app + " in " + letter])
 for number in "0123456789":
-    expect("ctrl-alt-cmd-" + number, "move-node-to-workspace --focus-follows-window " + number)
-    expect("ctrl-alt-cmd-shift-" + number, "workspace " + number)
-rows.append(["0-9", "Move this window there and follow", "Show workspace 0-9"])
-table(rows, [57, 230, usable - 287])
+    expect("ctrl-alt-cmd-shift-" + number, "move-node-to-workspace --focus-follows-window " + number)
+    expect("ctrl-alt-cmd-" + number, "workspace " + number)
+rows.append(["0-9", "Show workspace 0-9", "Move this window there and follow"])
+table(rows, [57, 196, usable - 253])
 y -= 5
-line("App shortcuts open or activate the app. Focus and the pointer follow.", 10, gap=14)
+line("Caps + Shift + letter opens/activates the app. Focus and the pointer follow.", 10, gap=14)
 
 heading("Arrows: ← ↓ ↑ →")
 table([
@@ -129,14 +129,13 @@ y -= 7
 line("Fn + ← / → / ↑ / ↓ sends Home / End / Page Up / Page Down on Mac keyboards.", 9.7, gap=14)
 line("Accordion: Left/Right in a horizontal group; Up/Down in a vertical group.", 9.7, gap=14)
 line("Pause reveals hidden workspace windows. No windows are closed.", 9.7, gap=14)
-line("Resize keys (+/-) use Swedish positions. See README for other layouts.", 9.7, gap=14)
 assert y >= 28, y
 canvas.showPage()
 canvas.save()
 reader = PdfReader(OUTPUT)
 assert len(reader.pages) == 1
 text = reader.pages[0].extract_text()
-for phrase in ["Caps + Shift + Fn + arrow", "Caps + plus (+)", "Caps + Escape", "Cmd + N / Cmd + T", "Cmd + Shift + comma"]:
+for phrase in ["Caps + Shift + Fn + arrow", "Caps + U", "Caps + D", "Caps + Escape", "Cmd + N / Cmd + T", "Cmd + Shift + comma"]:
     assert phrase in text
 print(OUTPUT)
 print("One A4 page. Text and shortcuts checked against the configuration.")
