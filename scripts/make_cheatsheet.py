@@ -33,7 +33,7 @@ layout_rows = [
     ("Ctrl+Opt+Cmd + R", "Rotate the group: horizontal / vertical", "ctrl-alt-cmd-r", "layout horizontal vertical"),
     ("Ctrl+Opt+Cmd + F", "Fill the workspace / restore", "ctrl-alt-cmd-f", "fullscreen"),
     ("Ctrl+Opt+Cmd + Shift + F", "Float this window / return it to tiling", "ctrl-alt-cmd-shift-f", "layout floating tiling"),
-    ("Ctrl+Opt+Cmd + N", "Balance window sizes", "ctrl-alt-cmd-n", "balance-sizes"),
+    ("Ctrl+Opt+Cmd + N", "Normalize: balance window sizes", "ctrl-alt-cmd-n", "balance-sizes"),
     ("Ctrl+Opt+Cmd + Tab", "Previous workspace and back", "ctrl-alt-cmd-tab", "workspace-back-and-forth"),
     ("Ctrl+Opt+Cmd + Backspace", "Remove ALL grouping on this workspace", "ctrl-alt-cmd-backspace", "flatten-workspace-tree"),
     ("Ctrl+Opt+Cmd + comma (,)", "Give the window less space", "ctrl-alt-cmd-comma", "resize smart -50"),

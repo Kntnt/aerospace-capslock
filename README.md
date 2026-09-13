@@ -137,7 +137,7 @@ In a horizontal accordion, use Left/Right to move within the group; in a vertica
 | Control-Option-Command + R | Rotate the group: horizontal / vertical |
 | Control-Option-Command + F | Fill the workspace / restore |
 | Control-Option-Command + Shift + F | Float the current window / return it to tiling |
-| Control-Option-Command + N | Balance window sizes |
+| Control-Option-Command + N | Normalize: balance window sizes |
 | Control-Option-Command + comma (,) | Give the window less space |
 | Control-Option-Command + period (.) | Give the window more space |
 | Control-Option-Command + Backspace | Remove all grouping on this workspace |
